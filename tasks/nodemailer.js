@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         transport: null,
         recipients: [],
         from: 'nodemailer <sender@example.com>',
-        subject: null
+        subject: ''
         html: '',
         text: ''
       }),
@@ -34,7 +34,12 @@ module.exports = function(grunt) {
       subject;
 
     if (_.isObject(options.transport)) {
-      transport = nodemailer.createTransport(options.transport.type, options.transport);
+      //check if a valid transport has been provided...
+      if (!_.has(options.transport, 'type') || nodemailer.Transport.transports.indexOf(options.transport.type.toString().trim().toUpperCase()) === -1) {
+        grunt.fail.fatal('Invalid Nodemailer trasnport type. Valid are: ' + nodemailer.Transport.transports.join(','));
+        return;
+      }
+      transport = nodemailer.createTransport(options.transport.type, options.transport.options || {});
     } else {
       transport = nodemailer.createTransport("sendmail");
     }
