@@ -51,7 +51,7 @@ The configuration object should have 2 properties:
   * **SMTP** for using SMTP
   * **SES** for using Amazon SES
   * **Sendmail** for utilizing systems *sendmail* command
-* `options`: tranport configuration options, see [Nodemailer documentation](https://github.com/andris9/Nodemailer#setting-up-a-transport-method) for more info.
+* `options`: transport configuration options, see [Nodemailer documentation](https://github.com/andris9/Nodemailer#setting-up-a-transport-method) for more info.
 
 #### options.recipients
 Type: `Array`
