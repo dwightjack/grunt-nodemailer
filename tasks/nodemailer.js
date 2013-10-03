@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 
     if (_.isObject(options.transport)) {
       //check if a valid transport has been provided...
-      if (!_.has(options.transport, 'type') || nodemailer.Transport.transports.indexOf(options.transport.type.toString().trim().toUpperCase()) === -1) {
+      if (!_.has(options.transport, 'type') || Object.keys(nodemailer.Transport.transports).indexOf(options.transport.type.toString().trim().toUpperCase()) === -1) {
         grunt.fail.fatal('Invalid Nodemailer trasnport type. Valid are: ' + nodemailer.Transport.transports.join(','));
         return;
       }
