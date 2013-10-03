@@ -28,9 +28,8 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-clean": "~0.5.0",
     "grunt": "~0.4.1"
   },
   "peerDependencies": {
@@ -40,6 +39,6 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "nodemailer": "~0.5.2"
+    "nodemailer": "~0.5.3"
   }
 }

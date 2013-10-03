@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         transport: null,
         recipients: [],
         from: 'nodemailer <sender@example.com>',
-        subject: ''
+        subject: '',
         html: '',
         text: ''
       }),
