@@ -13,7 +13,7 @@ module.exports = function(grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  var _ = grunt.util._;
+  var _ = require('lodash');
   var util = require('util');
   var nodemailer = require('nodemailer');
 
