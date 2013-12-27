@@ -53,6 +53,12 @@ The configuration object should have 2 properties:
   * **Sendmail** for utilizing systems *sendmail* command
 * `options`: transport configuration options, see [Nodemailer documentation](https://github.com/andris9/Nodemailer#setting-up-a-transport-method) for more info.
 
+#### options.message
+Type: `Object`
+Default value: `{}`
+
+E-mail message configuration. See [Nodemailer documentation](https://github.com/andris9/Nodemailer#e-mail-message-fields) for available options.
+
 #### options.recipients
 Type: `Array`
 Default value: `[]`
@@ -62,42 +68,59 @@ A collection of recipients. Every item should have 2 properties:
 * `name`: Name of the recipient
 * `email`: E-mail address of the recipient
 
-#### options.from
-Type: `String`
-Default value: `'nodemailer <sender@example.com>'`
+#### options.from **DEPRECATED since v0.2**
 
-Sets the _form_ field of the e-mail message.
+See [options.message](#optionsmessage) for details.
 
-#### options.subject
-Type: `String`
-Default value: `''`
+#### options.subject **DEPRECATED since v0.2**
 
-E-mail subject.
+See [options.message](#optionsmessage) for details.
 
-#### options.html
-Type: `String`
-Default value: `''`
+#### options.html **DEPRECATED since v0.2**
 
-E-mail body in HTML format.
+See [options.message](#optionsmessage) for details.
 
-#### options.text
-Type: `String`
-Default value: `''`
+#### options.text **DEPRECATED since v0.2**
 
-Email body in plain text format. 
+See [options.message](#optionsmessage) for details.
 
 ### Using external files
 
-Instead of providing `text` and `html` options you may use external files by setting a `src` property on the sub-task. The first file in the set will be used as the HTML body while the second (if available) as the plain text version. Example:
+
+**BREAKING CHANGES**: before v0.2 you had to provide 2 source files to pass HTML and text body message. Since v0.2 text files are automatically discovered. Keep reading for details.
+
+Instead of providing `text` and `html` message options you may use external files by setting a `src` property on the sub-task. Accepted file extensions are `.html`, `.htm` and `.txt`. 
+
+If HTML files are provided, the task will look for `.txt` files with same filename to be used as text fallbacks.
+
+Example:
 
 ```js
 nodemailer: {
   test: {
-    options: { /* ... transport, subject, etc ...*/},
-    src: ['email-body.html', 'email-body.txt']
+    options: { /* ... transport, message, etc ...*/},
+    src: ['email-body.html']
   }
 }
+
+//Will use email-body.html for HTML email body, 
+//optionally using email-body.txt (if found) as text fallback
 ```
+
+If multiple files are passed in, a message for each one will be delivered.
+
+```js
+nodemailer: {
+  test: {
+    options: { /* ... transport, message, etc ...*/},
+    src: ['email-body.html', 'email-body2.html']
+  }
+}
+
+//Will send 2 messages
+```
+
+**Note**: If HTML files include `title` tag it'll be used as the message subject.
 
 ### Usage Examples
 
@@ -105,7 +128,7 @@ nodemailer: {
 
 This configurations uses Gmail's SMTP service as a transport.
 
-By running the `nodemailer:external` task both HTML and plain text body will be overridden, while by running `nodemailer:external_html` only HTML body will be overridden.
+By running the `nodemailer:external` task HTML body will be overridden.
 
 ```js
 grunt.initConfig({
@@ -122,28 +145,24 @@ grunt.initConfig({
           }
         }
       },
+      message: {
+        subject: 'A test e-mail',
+        text: 'Plain text message',
+        html: '<body><h1>HTML custom message</h1></body>',
+      }
       recipients: [
         {
           email: 'jane.doe@gmail.com',
           name: 'Jane Doe'
         }
-      ],
-      subject: 'A test e-mail'
-      text: 'Plain text message'
+      ]
     },
 
-    inline: {
-      html: '<body><h1>HTML custom message</h1></body>',
-    },
+    inline: { /* use above options*/ },
 
     external: {
-      src: ['email-body.html', 'email-body.txt']
-    },
-
-    external_html: {
       src: ['email-body.html']
     }
-
   }
 });
 ```
@@ -152,6 +171,8 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+
+0.2.0 - Task allows for multiple external sources to better comply to [Grunt's file APIs](http://gruntjs.com/configuring-tasks#files). As of this version, you may set any supported [Nodemailer message's option](https://github.com/andris9/Nodemailer#e-mail-message-fields) onto the `options.message` option. Added some tests.
 
 0.1.2 - Replaced [deprecated](http://gruntjs.com/blog/2013-11-21-grunt-0.4.2-released) reference to `grunt.util._` with `lodash` npm module
 
