@@ -73,18 +73,17 @@ module.exports = function(grunt) {
     });
 
     if (defaultMessage.to.length < 1) {
-      grunt.fail.fatal('No recipient provided');
+      grunt.fail.fatal('No recipient provided.');
     }
 
     //process deprecated options
     //TODO: remove in next version
     _.each(['from','subject','html','text'], function (prop) {
       if (!_.isEmpty(options[prop])) {
+        grunt.verbose.writeln(('Option "' + prop + '" is DEPRECATED. Please, set "message.' + prop + '" instead.').yellow);
         defaultMessage[prop] = options[prop];
       }
     });
-
-
 
 
     if (this.filesSrc.length) {
@@ -134,7 +133,7 @@ module.exports = function(grunt) {
     }
 
 
-    grunt.log.writeln('Sending emails to recipients: ' + defaultMessage.to.join(','));
+    grunt.log.writeln(util.format('Sending %d e-mail%s to recipients: %s', messages.length, (messages.length > 1 ? 's': ''), defaultMessage.to.join(', ') ));
 
     //Sending messages in series (which is slower) since some
     //services may limit concurrent connections.

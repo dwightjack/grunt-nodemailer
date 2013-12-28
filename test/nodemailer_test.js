@@ -43,6 +43,7 @@ exports.nodemailer = {
 
   mixed_recipients: function (test) {
     test.expect(2);
+
     var actual = grunt.file.readJSON('tmp/mixed_recipients');
 
     test.ok(actual.message.indexOf('To: myself@gmail.com, \"John Doe\" <john.doe@gmail.com>') !== -1, "Multiple recipients parsed");

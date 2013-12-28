@@ -29,25 +29,26 @@ module.exports = function(grunt) {
 
     //Configuration to be run (and then tested).
     nodemailer: {
+
+      options: {
+        transport: {
+          type: 'filestub'
+        },
+        recipients: ['john.doe@gmail.com']
+      },
+
       simple_message: {
         options: {
-          transport: {
-            type: 'filestub'
-          },
           message: {
             subject: 'simple_message',
             html: '<h1>Test Message</h1>',
             text: 'test fallback'
-          },
-          recipients: ['john.doe@gmail.com']
+          }
         }
       },
 
       mixed_recipients: {
         options: {
-          transport: {
-            type: 'filestub'
-          },
           message: {
             subject: 'mixed_recipients',
             html: '<h1>Test Message</h1>',
@@ -63,15 +64,12 @@ module.exports = function(grunt) {
 
       external_sources: {
         options: {
-          transport: {
-            type: 'filestub'
-          },
+          subject: 'external_sources',
           message: {
             subject: 'external_sources',
             html: '<h1>Test Message</h1>',
             text: 'test fallback'
-          },
-          recipients: ['john.doe@gmail.com']
+          }
         },
         src: ['test/fixtures/*.html']
       }

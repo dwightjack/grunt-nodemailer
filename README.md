@@ -68,6 +68,8 @@ A collection of recipients. Every item should have 2 properties:
 * `name`: Name of the recipient
 * `email`: E-mail address of the recipient
 
+**Note**: Recipients specified here will be appended to those set in `options.message.to`.
+
 #### options.from **DEPRECATED since v0.2**
 
 See [options.message](#optionsmessage) for details.
@@ -87,7 +89,7 @@ See [options.message](#optionsmessage) for details.
 ### Using external files
 
 
-**BREAKING CHANGES**: before v0.2 you had to provide 2 source files to pass HTML and text body message. Since v0.2 text files are automatically discovered. Keep reading for details.
+_**BREAKING CHANGES**: before v0.2 you had to provide 2 source files in order to pass HTML and text body message. Since v0.2 text files are automatically discovered. Keep reading for details._
 
 Instead of providing `text` and `html` message options you may use external files by setting a `src` property on the sub-task. Accepted file extensions are `.html`, `.htm` and `.txt`. 
 
@@ -126,7 +128,7 @@ nodemailer: {
 
 #### E-mail delivery with Gmail SMTP server
 
-This configurations uses Gmail's SMTP service as a transport.
+This configurations uses Gmail's SMTP service as transport.
 
 By running the `nodemailer:external` task HTML body will be overridden.
 
@@ -172,7 +174,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-0.2.0 - Task allows for multiple external sources to better comply to [Grunt's file APIs](http://gruntjs.com/configuring-tasks#files). As of this version, you may set any supported [Nodemailer message's option](https://github.com/andris9/Nodemailer#e-mail-message-fields) onto the `options.message` option. Added some tests.
+0.2.0 - Task allows for multiple external sources to better comply to [Grunt's file APIs](http://gruntjs.com/configuring-tasks#files). As of this version, you may set any supported [Nodemailer message's option](https://github.com/andris9/Nodemailer#e-mail-message-fields) onto `options.message`. Added some tests.
 
 0.1.2 - Replaced [deprecated](http://gruntjs.com/blog/2013-11-21-grunt-0.4.2-released) reference to `grunt.util._` with `lodash` npm module
 
