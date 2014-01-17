@@ -138,7 +138,7 @@ grunt.initConfig({
 
     options: {
       transport: {
-        type: 'SMTP'
+        type: 'SMTP',
         options: {
           service: 'Gmail',
           auth: {
@@ -151,7 +151,7 @@ grunt.initConfig({
         subject: 'A test e-mail',
         text: 'Plain text message',
         html: '<body><h1>HTML custom message</h1></body>',
-      }
+      },
       recipients: [
         {
           email: 'jane.doe@gmail.com',
