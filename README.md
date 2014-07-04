@@ -174,6 +174,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+0.2.1 Display error message instead of error name (fixes issue #3 thanks to @aszmyd)
+
 0.2.0 - Task allows for multiple external sources to better comply to [Grunt's file APIs](http://gruntjs.com/configuring-tasks#files). As of this version, you may set any supported [Nodemailer message's option](https://github.com/andris9/Nodemailer#e-mail-message-fields) onto `options.message`. Added some tests.
 
 0.1.2 - Replaced [deprecated](http://gruntjs.com/blog/2013-11-21-grunt-0.4.2-released) reference to `grunt.util._` with `lodash` npm module
