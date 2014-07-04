@@ -141,7 +141,7 @@ module.exports = function(grunt) {
       transport.sendMail(msg, function(error, responseStatus) {
         if (error) {
           grunt.verbose.errorlns(JSON.stringify(error));
-          grunt.fail.fatal('Error occured: ' + error.name);
+          grunt.fail.fatal('Error occured: ' + error.message);
           next(error);
           return;
         }
