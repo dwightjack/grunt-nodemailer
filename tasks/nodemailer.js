@@ -45,6 +45,8 @@ module.exports = function(grunt) {
         html: '',
         text: ''
     });
+    // Override files provided in gruntfile if filepath added in grunt command
+    var files =  grunt.option('fileSrc') ? [grunt.option('fileSrc')] : this.filesSrc;
 
     //ensure recipients are an array
     if (!Array.isArray(defaultMessage.to)) {
@@ -86,11 +88,11 @@ module.exports = function(grunt) {
     });
 
 
-    if (this.filesSrc.length) {
+    if (files.length) {
       //When a file array is provided, use sources
       //as HTML/TXT message input
       //Multiple sources files will generate multiple messages
-      messages = _.map(this.filesSrc, function (f) {
+      messages = _.map(files, function (f) {
         var ext,
             txtFile,
             newMsg = false;
