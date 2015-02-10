@@ -47,7 +47,7 @@ A configuration object for an email transport. If left undefined or `null`, tran
 
 The configuration object should have 2 properties:
 
-* `type`: Type of transport. Valid options are: 
+* `type`: Type of transport. Valid options are:
   * **SMTP** for using SMTP
   * **SES** for using Amazon SES
   * **Sendmail** for utilizing systems *sendmail* command
@@ -91,7 +91,7 @@ See [options.message](#optionsmessage) for details.
 
 _**BREAKING CHANGES**: before v0.2 you had to provide 2 source files in order to pass HTML and text body message. Since v0.2 text files are automatically discovered. Keep reading for details._
 
-Instead of providing `text` and `html` message options you may use external files by setting a `src` property on the sub-task. Accepted file extensions are `.html`, `.htm` and `.txt`. 
+Instead of providing `text` and `html` message options you may use external files by setting a `src` property on the sub-task. Accepted file extensions are `.html`, `.htm` and `.txt`.
 
 If HTML files are provided, the task will look for `.txt` files with same filename to be used as text fallbacks.
 
@@ -105,7 +105,7 @@ nodemailer: {
   }
 }
 
-//Will use email-body.html for HTML email body, 
+//Will use email-body.html for HTML email body,
 //optionally using email-body.txt (if found) as text fallback
 ```
 
@@ -123,6 +123,14 @@ nodemailer: {
 ```
 
 **Note**: If HTML files include `title` tag it'll be used as the message subject.
+
+### CLI Options
+
+#### --fileSrc
+Type: `String`
+Default value: `null`
+
+Overrides `src` files set in the task configuration.
 
 ### Usage Examples
 
@@ -173,6 +181,8 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+
+0.3.0 Added grunt cli option to override file src (thanks to @posabsolute)
 
 0.2.1 Display error message instead of error name (fixes issue #3 thanks to @aszmyd)
 
