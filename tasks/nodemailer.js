@@ -101,12 +101,7 @@ module.exports = function(grunt) {
 
           ext = path.extname(f);
 
-          if (ext === '.txt') {
-
-            newMsg = _.clone(defaultMessage);
-            newMsg.text = grunt.file.read(f);
-
-          } else if (/^\.html?$/i.test(ext)) {
+          if (/^\.html?$/i.test(ext)) {
 
             newMsg = _.clone(defaultMessage);
             newMsg.html = grunt.file.read(f);
@@ -122,6 +117,9 @@ module.exports = function(grunt) {
               newMsg.text = grunt.file.read(txtFile);
             }
 
+          } else {
+            newMsg = _.clone(defaultMessage);
+            newMsg.text = grunt.file.read(f);
           }
 
         }

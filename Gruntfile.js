@@ -72,6 +72,28 @@ module.exports = function(grunt) {
           }
         },
         src: ['test/fixtures/*.html']
+      },
+
+      external_sources_txt: {
+        options: {
+          subject: 'external_sources_txt',
+          message: {
+            subject: 'external_sources_txt',
+            text: 'test fallback txt'
+          }
+        },
+        src: ['test/fixtures/email-body-as-txt.txt']
+      },
+
+      external_sources_md: {
+        options: {
+          subject: 'external_sources_md',
+          message: {
+            subject: 'external_sources_md',
+            text: 'test fallback md'
+          }
+        },
+        src: ['test/fixtures/*.md']
       }
     },
 

@@ -55,7 +55,6 @@ exports.nodemailer = {
 
     test.expect(5);
 
-
     var actual = grunt.file.readJSON('tmp/another_subject');
     var actualFallback = grunt.file.readJSON('tmp/test_with_fallback');
 
@@ -68,7 +67,29 @@ exports.nodemailer = {
 
     test.done();
 
+  },
+
+  external_sources_txt: function (test) {
+
+    test.expect(2);
+
+    var actual = grunt.file.readJSON('tmp/external_sources_txt');
+
+    test.ok(actual.message.indexOf('Subject: external_sources_txt') !== -1, 'Default title tag');
+    test.ok(actual.message.indexOf('this.is.the.text.txt') !== -1, 'Text is loaded from path');
+
+    test.done();
+  },
+
+  external_sources_md: function (test) {
+
+    test.expect(2);
+
+    var actual = grunt.file.readJSON('tmp/external_sources_md');
+
+    test.ok(actual.message.indexOf('Subject: external_sources_md') !== -1, 'Default title tag');
+    test.ok(actual.message.indexOf('this.is.the.text.md') !== -1, 'Text is loaded from path');
+
+    test.done();
   }
-
-
 };
