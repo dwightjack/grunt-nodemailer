@@ -10,6 +10,8 @@
 
 module.exports = function(grunt) {
 
+  var filestubTransport = require('./tasks/transports/fake');
+
   // Project configuration.
   grunt.initConfig({
     jshint: {
@@ -18,22 +20,20 @@ module.exports = function(grunt) {
         'tasks/*.js'
       ],
       options: {
-        jshintrc: '.jshintrc',
-      },
+        jshintrc: '.jshintrc'
+      }
     },
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: ['tmp'],
+      tests: ['tmp']
     },
 
     //Configuration to be run (and then tested).
     nodemailer: {
 
       options: {
-        transport: {
-          type: 'filestub'
-        },
+        transport: filestubTransport,
         recipients: ['john.doe@gmail.com']
       },
 

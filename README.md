@@ -43,15 +43,9 @@ grunt.initConfig({
 Type: `Object`
 Default value: `null`
 
-A configuration object for an email transport. If left undefined or `null`, transport will default to `'sendmail'` with default options.
+A nodemailer transform object. See the [official documentation](https://github.com/nodemailer/nodemailer#transports) for details.
 
-The configuration object should have 2 properties:
-
-* `type`: Type of transport. Valid options are:
-  * **SMTP** for using SMTP
-  * **SES** for using Amazon SES
-  * **Sendmail** for utilizing systems *sendmail* command
-* `options`: transport configuration options, see [Nodemailer documentation](https://github.com/andris9/Nodemailer#setting-up-a-transport-method) for more info.
+**Note:** if not set will default to `sendmail` transport.
 
 #### options.message
 Type: `Object`
@@ -91,7 +85,7 @@ See [options.message](#optionsmessage) for details.
 
 _**BREAKING CHANGES**: before v0.2 you had to provide 2 source files in order to pass HTML and text body message. Since v0.2 text files are automatically discovered. Keep reading for details._
 
-Instead of providing `text` and `html` message options you may use external files by setting a `src` property on the sub-task. Accepted file extensions are `.html`, `.htm` and `.txt`.
+Instead of providing `text` and `html` message options you may use external files by setting a `src` property on the sub-task. All file extensions except `.html` will be used as `text` option for the email.
 
 If HTML files are provided, the task will look for `.txt` files with same filename to be used as text fallbacks.
 
@@ -141,20 +135,16 @@ This configurations uses Gmail's SMTP service as transport.
 By running the `nodemailer:external` task HTML body will be overridden.
 
 ```js
+
+var nodemailer = require('nodemailer');
+
+var gmailTransport = nodemailer.createTransport('smtps://john.doe%40gmail.com:password@smtp.gmail.com');
+
 grunt.initConfig({
   nodemailer: {
 
     options: {
-      transport: {
-        type: 'SMTP',
-        options: {
-          service: 'Gmail',
-          auth: {
-            user: 'john.doe@gmail.com',
-            pass: 'password'
-          }
-        }
-      },
+      transport: gmailTransport,
       message: {
         subject: 'A test e-mail',
         text: 'Plain text message',
@@ -181,6 +171,8 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+
+1.0.0 Updated to Nodemail 1+ APIs, added support for every filetype as external source (thanks to @wardpeet)
 
 0.3.0 Added grunt cli option to override file src (thanks to @posabsolute)
 
