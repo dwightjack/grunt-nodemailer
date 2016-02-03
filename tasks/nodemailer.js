@@ -17,10 +17,15 @@ module.exports = function(grunt) {
       util = require('util'),
       _ = require('lodash'),
       async = require('async'),
-      nodemailer = require('nodemailer');
+      nodemailer = require('nodemailer'),
+      sendmailTransport;
 
-  //used for testing purpouse
-  nodemailer.Transport.transports.FILESTUB = require('./transports/fake');
+
+  try {
+    sendmailTransport = require('nodemailer-sendmail-transport');
+  } catch (e) {
+    sendmailTransport = require('nodemailer/node_modules/nodemailer-sendmail-transport');
+  }
 
   grunt.registerMultiTask('nodemailer', 'Grunt wrapper for Nodemailer', function() {
     var done = this.async(),
@@ -53,15 +58,10 @@ module.exports = function(grunt) {
       defaultMessage.to = defaultMessage.to.split(',');
     }
 
-    if (_.isObject(options.transport)) {
-      //check if a valid transport has been provided...
-      if (!_.has(options.transport, 'type') || Object.keys(nodemailer.Transport.transports).indexOf(options.transport.type.toString().trim().toUpperCase()) === -1) {
-        grunt.fail.fatal('Invalid Nodemailer trasnport type. Valid are: ' + nodemailer.Transport.transports.join(','));
-        return;
-      }
-      transport = nodemailer.createTransport(options.transport.type, options.transport.options || {});
+    if (options.transport) {
+      transport = nodemailer.createTransport(options.transport);
     } else {
-      transport = nodemailer.createTransport("sendmail");
+      transport = nodemailer.createTransport(sendmailTransport);
     }
 
     _.each(options.recipients, function(el) {
