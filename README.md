@@ -173,6 +173,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+1.1.0 Updated to Nodemailer 2.x and Grunt 1.x ready
+
 1.0.0 Updated to Nodemail 1+ APIs, added support for every filetype as external source (thanks to @wardpeet)
 
 0.3.0 Added grunt cli option to override file src (thanks to @posabsolute)
