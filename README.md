@@ -5,7 +5,8 @@
 
 
 ## Getting Started
-This plugin requires Grunt `~0.4.1`
+
+This plugin is compatible with Grunt `1.x` but requires Grunt `>=0.4.2`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -171,6 +172,8 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+
+1.1.0 Updated to Nodemailer 2.x and Grunt 1.x ready
 
 1.0.0 Updated to Nodemail 1+ APIs, added support for every filetype as external source (thanks to @wardpeet)
 

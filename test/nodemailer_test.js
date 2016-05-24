@@ -21,75 +21,76 @@ var grunt = require('grunt');
     test.doesNotThrow(block, [error], [message])
     test.ifError(value)
 */
-
+/* eslint-disable func-names, vars-on-top, quotes, one-var, camelcase */
 exports.nodemailer = {
-  setUp: function(done) {
-    // setup here if necessary
-    done();
-  },
+    setUp: function (done) {
+        // setup here if necessary
+        done();
+    },
 
-  simple_message: function (test) {
-    test.expect(4);
+    simple_message: function (test) {
+        test.expect(4);
 
-    var actual = grunt.file.readJSON('tmp/simple_message');
+        var actual = grunt.file.readJSON('tmp/simple_message');
 
-    test.ok(actual.message.indexOf('<h1>Test Message</h1>') !== -1, 'HTML parsed');
-    test.ok(actual.message.indexOf('test fallback') !== -1, 'Text fallback parsed');
-    test.ok(actual.message.indexOf('Content-Type: multipart/alternative;') !== -1, 'Multipart content-type set');
+        test.ok(actual.message.indexOf('<h1>Test Message</h1>') !== -1, 'HTML parsed');
+        test.ok(actual.message.indexOf('test fallback') !== -1, 'Text fallback parsed');
+        test.ok(actual.message.indexOf('Content-Type: multipart/alternative;') !== -1, 'Multipart content-type set');
 
-    test.equal(actual.envelope.to[0], 'john.doe@gmail.com', "Recipients processed");
-    test.done();
-  },
+        test.equal(actual.envelope.to[0], 'john.doe@gmail.com', "Recipients processed");
+        test.done();
+    },
 
-  mixed_recipients: function (test) {
-    test.expect(2);
+    mixed_recipients: function (test) {
+        test.expect(2);
 
-    var actual = grunt.file.readJSON('tmp/mixed_recipients');
+        var actual = grunt.file.readJSON('tmp/mixed_recipients');
 
-    test.ok(actual.message.indexOf('To: myself@gmail.com, John Doe <john.doe@gmail.com>') !== -1, "Multiple recipients parsed");
-    test.equal(actual.envelope.to.join(','), 'myself@gmail.com,john.doe@gmail.com', "Recipients processed into message envelope");
-    test.done();
-  },
+        test.ok(actual.message.indexOf('To: myself@gmail.com, John Doe <john.doe@gmail.com>') !== -1, "Multiple recipients parsed");
+        test.equal(actual.envelope.to.join(','), 'myself@gmail.com,john.doe@gmail.com', "Recipients processed into message envelope");
+        test.done();
+    },
 
-  external_sources: function (test) {
+    external_sources: function (test) {
 
-    test.expect(5);
+        test.expect(5);
 
-    var actual = grunt.file.readJSON('tmp/another_subject');
-    var actualFallback = grunt.file.readJSON('tmp/test_with_fallback');
+        var actual = grunt.file.readJSON('tmp/another_subject');
+        var actualFallback = grunt.file.readJSON('tmp/test_with_fallback');
 
-    test.ok(actual.message.indexOf('Subject: another_subject') !== -1, 'title tag in HTML source overrides default one');
-    test.ok(actual.message.indexOf('<h2>Just a test</h2>') !== -1, 'Custom HTML from 1st source');
-    test.ok(actual.message.indexOf('test fallback') !== -1, 'Text fallback is untouched');
+        test.ok(actual.message.indexOf('Subject: another_subject') !== -1, 'title tag in HTML source overrides default one');
+        test.ok(actual.message.indexOf('<h2>Just a test</h2>') !== -1, 'Custom HTML from 1st source');
+        test.ok(actual.message.indexOf('test fallback') !== -1, 'Text fallback is untouched');
 
-    test.ok(actualFallback.message.indexOf('<h2>Test with fallback</h2>') !== -1, 'Custom HTML from 2nd source');
-    test.ok(actualFallback.message.indexOf('this.is.the.text.fallback') !== -1, 'Text fallback automatically loaded');
+        test.ok(actualFallback.message.indexOf('<h2>Test with fallback</h2>') !== -1, 'Custom HTML from 2nd source');
+        test.ok(actualFallback.message.indexOf('this.is.the.text.fallback') !== -1, 'Text fallback automatically loaded');
 
-    test.done();
+        test.done();
 
-  },
+    },
 
-  external_sources_txt: function (test) {
+    external_sources_txt: function (test) {
 
-    test.expect(2);
+        test.expect(2);
 
-    var actual = grunt.file.readJSON('tmp/external_sources_txt');
+        var actual = grunt.file.readJSON('tmp/external_sources_txt');
 
-    test.ok(actual.message.indexOf('Subject: external_sources_txt') !== -1, 'Default title tag');
-    test.ok(actual.message.indexOf('this.is.the.text.txt') !== -1, 'Text is loaded from path');
+        test.ok(actual.message.indexOf('Subject: external_sources_txt') !== -1, 'Default title tag');
+        test.ok(actual.message.indexOf('this.is.the.text.txt') !== -1, 'Text is loaded from path');
 
-    test.done();
-  },
+        test.done();
+    },
 
-  external_sources_md: function (test) {
+    external_sources_md: function (test) {
 
-    test.expect(2);
+        test.expect(2);
 
-    var actual = grunt.file.readJSON('tmp/external_sources_md');
+        var actual = grunt.file.readJSON('tmp/external_sources_md');
 
-    test.ok(actual.message.indexOf('Subject: external_sources_md') !== -1, 'Default title tag');
-    test.ok(actual.message.indexOf('this.is.the.text.md') !== -1, 'Text is loaded from path');
+        test.ok(actual.message.indexOf('Subject: external_sources_md') !== -1, 'Default title tag');
+        test.ok(actual.message.indexOf('this.is.the.text.md') !== -1, 'Text is loaded from path');
 
-    test.done();
-  }
+        test.done();
+    }
 };
+/* eslint-enable func-names, vars-on-top, quotes, one-var, camelcase */
