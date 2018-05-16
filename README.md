@@ -2,6 +2,8 @@
 
 > Grunt wrapper for [Nodemailer](https://github.com/andris9/Nodemailer)
 
+:exclamation: :exclamation:**MAINTAINERS WANTED: I'm no longer maintaining this project. Feel free to drop me a line if you're interested in keeping up the development** :exclamation: :exclamation:
+
 
 
 ## Getting Started
